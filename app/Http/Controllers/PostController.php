@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use App\Events\PostCreated;
 use App\Models\Tag;
 use App\Policies\PostPolicy;
 use App\Models\Category;
@@ -59,8 +60,12 @@ class PostController extends Controller
             foreach($request->tags as $tag){
                 $posts->tags()->attach($tag);
             }
+            PostCreated::dispatch($post);
+
+            return redirect()->route('posts.index');
         }
-        return redirect()->route('posts.index');
+
+
     }
 
 
@@ -87,7 +92,7 @@ class PostController extends Controller
 
     public function update(StorePostRequest $request, post $post)
     {
-       
+
         if($request->hasFile('photo')){
             if(isset($post->photo)){
                 Storage::delete($post->photo);
