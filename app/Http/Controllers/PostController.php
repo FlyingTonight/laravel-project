@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Models\Post;
+use App\Listeners\Log;
 use App\Events\PostCreated;
 use App\Models\Tag;
 use App\Policies\PostPolicy;
@@ -60,7 +61,7 @@ class PostController extends Controller
             foreach($request->tags as $tag){
                 $posts->tags()->attach($tag);
             }
-            PostCreated::dispatch($post);
+            PostCreated::dispatch($posts);
 
             return redirect()->route('posts.index');
         }

@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use Storage\Log\Log;
+use Illuminate\Support\Facades\Log;
 use App\Events\PostCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -27,6 +27,6 @@ class SendNotificationToAdmin
      */
     public function handle(PostCreated $event)
     {
-        Log::alert('email jonatildi'. $event->post->title);
+        Log::alert('email jonatildi '. $event->post->title);
     }
 }
