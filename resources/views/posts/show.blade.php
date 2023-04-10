@@ -7,7 +7,7 @@
       Post - {{$post->id}}
     </x-page-header>
 <!-- Detail Start -->
-
+ 
 
     <div class="container-fluid py-5">
         <div class="container">

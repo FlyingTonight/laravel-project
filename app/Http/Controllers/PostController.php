@@ -10,7 +10,7 @@ use App\Models\Tag;
 use App\Policies\PostPolicy;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
@@ -61,12 +61,14 @@ class PostController extends Controller
             foreach($request->tags as $tag){
                 $posts->tags()->attach($tag);
             }
-            PostCreated::dispatch($posts);
 
-            return redirect()->route('posts.index');
         }
 
+        PostCreated::dispatch($posts);
 
+        // ChanGepost::dispacht($post);
+
+        return redirect()->route('posts.index');
     }
 
 
