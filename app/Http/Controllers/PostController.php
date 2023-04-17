@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Cache;
 use App\Models\Post;
 use App\Listeners\Log;
 use App\Events\PostCreated;
@@ -28,6 +29,11 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest()->paginate(9);
+        // $posts = Post::latest()->get();
+        // $posts = Cache::remember('posts', now()->addSeconds(), function () {
+        //     return DB::table('users')->get();
+        // });
+
         return view('posts.index')->with('posts', $posts);
     }
 
